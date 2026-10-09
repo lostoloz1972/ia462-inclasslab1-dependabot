@@ -13,4 +13,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build image
-        run: docker build --tag ia462-inclasslab1:${{ github.sha }} .
+        run: docker build .
