@@ -1,27 +1,16 @@
-name: CI
+name: Container build
 
 on:
   push:
-    branches:
-      - main
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run tests
-        run: npm test
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build --tag ia462-inclasslab1:${{ github.sha }} .
